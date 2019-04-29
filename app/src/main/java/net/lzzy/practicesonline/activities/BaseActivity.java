@@ -18,6 +18,8 @@ import net.lzzy.practicesonline.utils.AppUtils;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private Fragment fragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +29,20 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         //setFragment();
         FragmentManager manager=getSupportFragmentManager();
-        Fragment fragment=manager.findFragmentById(getContainerId());
+        fragment = manager.findFragmentById(getContainerId());
 
-        if (fragment==null){
-            fragment=createFragment();
-            manager.beginTransaction().add(getContainerId(),fragment).commit();
+        if (fragment ==null){
+            fragment =createFragment();
+            manager.beginTransaction().add(getContainerId(), fragment).commit();
         }
 
 
         populate();
 
+    }
+
+    protected Fragment getFragment(){
+        return fragment;
     }
     /**
      * 返回相应布局文件资源

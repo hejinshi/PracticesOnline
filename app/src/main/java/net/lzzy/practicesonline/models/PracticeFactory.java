@@ -24,7 +24,16 @@ public class PracticeFactory {
         repository=new SqlRepository<>(AppUtils.getContext(),Practice.class, DbConstants.packager);
     }
 
-    private List<Practice> get(){
+    public Practice getByApiId(int apiId){
+        String a=String.valueOf(apiId);
+        try {
+            return repository.getByKeyword(a,new String[]{"apiId"},true).get(0);
+        } catch (IllegalAccessException|InstantiationException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public List<Practice> get(){
         return repository.get();
     }
 
@@ -32,7 +41,7 @@ public class PracticeFactory {
         return repository.getById(id);
     }
 
-    private List<Practice> searchPractices(String kw){
+    public List<Practice> searchPractices(String kw){
         try {
             return repository.getByKeyword(kw,new String[]{Practice.COL_NAME},false);
         } catch (IllegalAccessException|InstantiationException e) {
@@ -52,7 +61,7 @@ public class PracticeFactory {
 
     }
 
-    private boolean add(Practice practice){
+    public boolean add(Practice practice){
         if (isPracticeInDb(practice)){
             return false;
         }
@@ -60,7 +69,7 @@ public class PracticeFactory {
         return true;
     }
 
-    private UUID getPracticeId(int apiId){
+    public UUID getPracticeId(int apiId){
         try {
             List<Practice> practices=repository.getByKeyword(String.valueOf(apiId),new String[]{Practice.COL_API_ID},true);
             if (practices.size()>0){
@@ -81,14 +90,14 @@ public class PracticeFactory {
 
     }
 
-    private void saveQuestions(List<Question> questions,UUID practiceId){
+    public void saveQuestions(List<Question> questions,UUID practiceId){
         for (Question question:questions){
             QuestionFactory.getInstance().insert(question);
         }
         setPracticeDown(practiceId.toString());
     }
 
-    private boolean deletePracticeAndRelated(Practice practice){
+    public boolean deletePracticeAndRelated(Practice practice){
         try {
             List<String> sqlAction = new ArrayList<>();
             sqlAction.add(repository.getDeleteString(practice));

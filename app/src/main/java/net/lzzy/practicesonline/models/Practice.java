@@ -1,15 +1,20 @@
 package net.lzzy.practicesonline.models;
 
+import net.lzzy.practicesonline.constants.ApiConstans;
 import net.lzzy.sqllib.Ignored;
+import net.lzzy.sqllib.Jsonable;
 import net.lzzy.sqllib.Sqlitable;
 
-import java.sql.Date;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
 
 /**
  * Created by lzzy_gxy on 2019/4/16.
  * Description:
  */
-public class Practice extends BaseEntity implements Sqlitable {
+public class Practice extends BaseEntity implements Sqlitable, Jsonable {
 
     @Ignored
     static final String COL_NAME="name";
@@ -80,5 +85,19 @@ public class Practice extends BaseEntity implements Sqlitable {
     @Override
     public boolean needUpdate() {
         return false;
+    }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        return null;
+    }
+
+    @Override
+    public void fromJson(JSONObject jsonObject) throws JSONException {
+        apiId=jsonObject.getInt(ApiConstans.JSON_PRACTICE_API_ID);
+        name=jsonObject.getString(ApiConstans.JSON_PRACTICE_NAME);
+        outlines=jsonObject.getString(ApiConstans.JSON_PRACTICE_OUTLINES);
+        questionCount=jsonObject.getInt(ApiConstans.JSON_PRACTICE_QUESTION_COUNT);
+        downloadDate=new Date();
     }
 }
