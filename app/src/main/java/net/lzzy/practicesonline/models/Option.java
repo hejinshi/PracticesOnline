@@ -1,6 +1,6 @@
 package net.lzzy.practicesonline.models;
 
-import net.lzzy.practicesonline.constants.ApiConstans;
+import net.lzzy.practicesonline.constants.ApiConstants;
 import net.lzzy.sqllib.Ignored;
 import net.lzzy.sqllib.Jsonable;
 import net.lzzy.sqllib.Sqlitable;
@@ -17,6 +17,9 @@ import java.util.UUID;
 public class Option extends BaseEntity implements Sqlitable, Jsonable {
     @Ignored
     public static final String COL_QUESTION_ID="questionId";
+    @Ignored
+    public static final String COL_CONTENT="content";
+
     private String content;
     private String label;
     private UUID questionId;
@@ -75,9 +78,9 @@ public class Option extends BaseEntity implements Sqlitable, Jsonable {
 
     @Override
     public void fromJson(JSONObject jsonObject) throws JSONException {
-        content=jsonObject.getString(ApiConstans.JSON_OPTION_CONTENT);
-        label=jsonObject.getString(ApiConstans.JSON_OPTION_LABEL);
-        apiId=jsonObject.getInt(ApiConstans.JSON_OPTION_API_ID);
+        content=jsonObject.getString(ApiConstants.JSON_OPTION_CONTENT);
+        label=jsonObject.getString(ApiConstants.JSON_OPTION_LABEL);
+        apiId=jsonObject.getInt(ApiConstants.JSON_OPTION_API_ID);
 
 
     }

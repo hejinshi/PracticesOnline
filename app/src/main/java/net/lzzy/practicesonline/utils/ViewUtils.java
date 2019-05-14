@@ -100,4 +100,14 @@ public class ViewUtils {
         public abstract void handleQuery(String kw);
     }
 
+    public static int px2dp(int pxValue) {
+        float scale = AppUtils.getContext().getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int dp2px(int dpValue) {
+        float scale = AppUtils.getContext().getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
 }

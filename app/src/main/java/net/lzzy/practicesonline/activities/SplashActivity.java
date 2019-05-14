@@ -2,22 +2,16 @@ package net.lzzy.practicesonline.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import net.lzzy.practicesonline.R;
-import net.lzzy.practicesonline.constants.ApiConstans;
+import net.lzzy.practicesonline.constants.ApiConstants;
 import net.lzzy.practicesonline.fragment.SplashFragment;
 import net.lzzy.practicesonline.utils.AbstractStaticHandler;
 import net.lzzy.practicesonline.utils.AppUtils;
@@ -75,7 +69,7 @@ public class SplashActivity extends BaseActivity implements SplashFragment.OnSpl
 
     private void detectServerStatus(){
         try {
-            AppUtils.tryConnectServer(ApiConstans.URL_API);
+            AppUtils.tryConnectServer(ApiConstants.URL_API);
         } catch (IOException e) {
             isServerOn=false;
             handler.sendMessage(handler.obtainMessage(WHAT_SERVER_OFF,e.getMessage()));

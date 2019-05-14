@@ -1,6 +1,6 @@
 package net.lzzy.practicesonline.network;
 
-import net.lzzy.practicesonline.constants.ApiConstans;
+import net.lzzy.practicesonline.constants.ApiConstants;
 import net.lzzy.practicesonline.models.Option;
 import net.lzzy.practicesonline.models.Question;
 import net.lzzy.sqllib.JsonConverter;
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public class QuestionService {
     public static String getQuestionsOfPracticeFromServer(int apiId) throws IOException {
-        String address= ApiConstans.URL_QUESTIONS+apiId;
+        String address= ApiConstants.URL_QUESTIONS+apiId;
         return ApiService.okGet(address);
     }
 
@@ -41,7 +41,7 @@ public class QuestionService {
         JSONArray array=(JSONArray)(new JSONTokener(jsonAnswers)).nextValue();
         for (int i=0;i<array.length();i++){
             JSONObject obj=array.getJSONObject(i);
-            answerIds.add(obj.getInt(ApiConstans.JSON_ANSWER_OPTION_ID));
+            answerIds.add(obj.getInt(ApiConstants.JSON_ANSWER_OPTION_ID));
         }
         for (Option o:options){
             if (answerIds.contains(o.getApiId())){

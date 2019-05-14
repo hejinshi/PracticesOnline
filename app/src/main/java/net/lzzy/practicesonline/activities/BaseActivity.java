@@ -20,6 +20,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private Fragment fragment;
 
+    public FragmentManager getManager() {
+        return manager;
+    }
+
+    private FragmentManager manager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppUtils.addActivity(this);
 
         //setFragment();
-        FragmentManager manager=getSupportFragmentManager();
+        manager = getSupportFragmentManager();
         fragment = manager.findFragmentById(getContainerId());
 
         if (fragment ==null){

@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ResultActivity"/>
         <activity android:name=".activities.PracticesActivity" />
         <service android:name=".network.DetectWebService"/>
     </application>

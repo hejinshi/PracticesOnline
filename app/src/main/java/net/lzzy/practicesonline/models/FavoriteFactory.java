@@ -25,7 +25,7 @@ public class FavoriteFactory {
 
 
 
-    private Favorite getFavoriteByQuestion(String question){
+    public Favorite getFavoriteByQuestion(String question){
         try {
             List<Favorite> favorites=repository
                     .getByKeyword(question,new String[]{Favorite.COL_QUESTION_ID},true);
@@ -42,7 +42,7 @@ public class FavoriteFactory {
         Favorite favorite=getFavoriteByQuestion(questionId);
         return favorite==null?null:repository.getDeleteString(favorite);
     }
-    private boolean isQuestionStarred(String questionId){
+    public boolean isQuestionStarred(String questionId){
         try {
             List<Favorite> favorites=repository.getByKeyword(questionId
                     ,new String[]{Favorite.COL_QUESTION_ID},true);
@@ -54,7 +54,7 @@ public class FavoriteFactory {
 
     }
 
-    private void starQuestion(UUID questionId){
+    public void starQuestion(UUID questionId){
         Favorite favorite=getFavoriteByQuestion(questionId.toString());
         if (favorite==null){
             favorite=new Favorite();
@@ -64,14 +64,14 @@ public class FavoriteFactory {
         }
     }
 
-    private void cancelStarQuestion(UUID questionId){
+    public void cancelStarQuestion(UUID questionId){
         Favorite favorite=getFavoriteByQuestion(questionId.toString());
         if (favorite!=null){
             repository.delete(favorite);
         }
     }
 
-    private List<Question> getAllFavorites(List<Question> questions){
+    public List<Question> getAllFavorites(List<Question> questions){
 
         return null;
     }

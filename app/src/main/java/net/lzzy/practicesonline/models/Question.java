@@ -1,6 +1,6 @@
 package net.lzzy.practicesonline.models;
 
-import net.lzzy.practicesonline.constants.ApiConstans;
+import net.lzzy.practicesonline.constants.ApiConstants;
 import net.lzzy.practicesonline.models.view.QuestionType;
 import net.lzzy.practicesonline.network.QuestionService;
 import net.lzzy.sqllib.Ignored;
@@ -97,11 +97,11 @@ public class Question extends BaseEntity implements Sqlitable, Jsonable {
 
     @Override
     public void fromJson(JSONObject jsonObject) throws JSONException {
-        analysis=jsonObject.getString(ApiConstans.JSON_QUESTION_ANALYSIS);
-        content=jsonObject.getString(ApiConstans.JSON_QUESTION_CONTENT);
-        setDbType(jsonObject.getInt(ApiConstans.JSON_QUESTION_TYPE));
-        String strOptions=jsonObject.getString(ApiConstans.JSON_QUESTION_OPTIONS);
-        String strAnswers=jsonObject.getString(ApiConstans.JSON_QUESTION_ANSWER);
+        analysis=jsonObject.getString(ApiConstants.JSON_QUESTION_ANALYSIS);
+        content=jsonObject.getString(ApiConstants.JSON_QUESTION_CONTENT);
+        setDbType(jsonObject.getInt(ApiConstants.JSON_QUESTION_TYPE));
+        String strOptions=jsonObject.getString(ApiConstants.JSON_QUESTION_OPTIONS);
+        String strAnswers=jsonObject.getString(ApiConstants.JSON_QUESTION_ANSWER);
         try {
             List<Option> options= QuestionService.getOptionsFromJson(strOptions,strAnswers);
             for (Option option:options){

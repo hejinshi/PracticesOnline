@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.lzzy.practicesonline.R;
-import net.lzzy.practicesonline.models.Option;
 import net.lzzy.practicesonline.models.Practice;
 import net.lzzy.practicesonline.models.PracticeFactory;
 import net.lzzy.practicesonline.models.Question;
@@ -35,8 +34,6 @@ import net.lzzy.practicesonline.utils.DateTimeUtils;
 import net.lzzy.practicesonline.utils.ViewUtils;
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
-
-import org.json.JSONException;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -256,7 +253,7 @@ public class PracticesFragment extends BaseFragment {
                 viewHolder.getConvertView().setOnTouchListener(new ViewUtils.AbstractTouchListener() {
                     @Override
                     public boolean handleTouch(MotionEvent event) {
-                        slideToDelte(event,btnDel,practice);
+                        slideToDelete(event,btnDel,practice);
                         return true;
                     }
                 });
@@ -278,7 +275,7 @@ public class PracticesFragment extends BaseFragment {
     private float touchX1;
     private static final float MIN_DISTANCE=100;
     private boolean isDeleting=false;
-    private void slideToDelte(MotionEvent event,Button btnDel,Practice practice){
+    private void slideToDelete(MotionEvent event, Button btnDel, Practice practice){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 touchX1=event.getX();

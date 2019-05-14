@@ -1,7 +1,8 @@
 package net.lzzy.practicesonline.network;
 
-import net.lzzy.practicesonline.constants.ApiConstans;
+import net.lzzy.practicesonline.constants.ApiConstants;
 import net.lzzy.practicesonline.models.Practice;
+import net.lzzy.practicesonline.models.view.PracticeResult;
 import net.lzzy.sqllib.JsonConverter;
 
 import org.json.JSONException;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class PracticeService {
     public static String getPracticesFromServer()throws IOException {
-        return ApiService.okGet(ApiConstans.URL_PRACTICES);
+        return ApiService.okGet(ApiConstants.URL_PRACTICES);
     }
 
     public static List<Practice> getPractices(String json) throws IllegalAccessException, JSONException, InstantiationException {
@@ -23,4 +24,7 @@ public class PracticeService {
         return converter.getArray(json);
     }
 
+    public static int postResult(PracticeResult result)throws JSONException,IOException{
+        return ApiService.okPost(ApiConstants.URL_RESULT,result.toJson());
+    }
 }

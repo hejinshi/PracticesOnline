@@ -145,6 +145,7 @@ public class PracticesActivity extends BaseActivity implements PracticesFragment
                 .build();
         mNotificationManager.notify(0, mNotification);
         Intent intent=new Intent(this,QuestionActivity.class);
+        intent.putExtra(EXTRA_PRACTICE_ID,practiceId);
         intent.putExtra(EXTRA_API_ID,apiId);
         startActivity(intent);
     }

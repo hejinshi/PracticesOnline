@@ -1,6 +1,6 @@
 package net.lzzy.practicesonline.models;
 
-import net.lzzy.practicesonline.constants.ApiConstans;
+import net.lzzy.practicesonline.constants.ApiConstants;
 import net.lzzy.sqllib.Ignored;
 import net.lzzy.sqllib.Jsonable;
 import net.lzzy.sqllib.Sqlitable;
@@ -94,10 +94,10 @@ public class Practice extends BaseEntity implements Sqlitable, Jsonable {
 
     @Override
     public void fromJson(JSONObject jsonObject) throws JSONException {
-        apiId=jsonObject.getInt(ApiConstans.JSON_PRACTICE_API_ID);
-        name=jsonObject.getString(ApiConstans.JSON_PRACTICE_NAME);
-        outlines=jsonObject.getString(ApiConstans.JSON_PRACTICE_OUTLINES);
-        questionCount=jsonObject.getInt(ApiConstans.JSON_PRACTICE_QUESTION_COUNT);
+        apiId=jsonObject.getInt(ApiConstants.JSON_PRACTICE_API_ID);
+        name=jsonObject.getString(ApiConstants.JSON_PRACTICE_NAME);
+        outlines=jsonObject.getString(ApiConstants.JSON_PRACTICE_OUTLINES);
+        questionCount=jsonObject.getInt(ApiConstants.JSON_PRACTICE_QUESTION_COUNT);
         downloadDate=new Date();
     }
 }

@@ -39,7 +39,7 @@ public class QuestionFactory {
 
     }
 
-    private Question getById(String questionId){
+    public Question getById(String questionId){
         try{
             Question question=repository.getById(questionId);
             completeQuestion(question);
