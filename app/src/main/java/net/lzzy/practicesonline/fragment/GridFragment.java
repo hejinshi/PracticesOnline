@@ -1,6 +1,6 @@
 package net.lzzy.practicesonline.fragment;
 
-import android.graphics.Color;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.Button;
@@ -9,6 +9,7 @@ import android.widget.GridView;
 import androidx.annotation.Nullable;
 
 import net.lzzy.practicesonline.R;
+import net.lzzy.practicesonline.models.view.BarChartView;
 import net.lzzy.practicesonline.models.view.QuestionResult;
 import net.lzzy.practicesonline.utils.AppUtils;
 import net.lzzy.sqllib.GenericAdapter;
@@ -27,6 +28,8 @@ public class GridFragment extends BaseFragment{
     private String practicesId;
     private List<QuestionResult> results;
     GenericAdapter<QuestionResult> adapter;
+    private OnGridListener onGridListener;
+
 
     public static GridFragment newInstance(String practicesId, List<QuestionResult> result){
         GridFragment fragment=new GridFragment();
@@ -49,7 +52,7 @@ public class GridFragment extends BaseFragment{
                 //String s=results.lastIndexOf(result)+1+"";
                 viewHolder.setTextView(R.id.grid_item_tv,s);
                 Button btn=viewHolder.getView(R.id.grid_item_tv);
-
+                btn.setOnClickListener(v -> onGridListener.returnPosition(getPosition(result)));
                 if (result.isRight()){
                     btn.setBackgroundResource(R.drawable.grid_green);
                 }else {
@@ -88,5 +91,27 @@ public class GridFragment extends BaseFragment{
     @Override
     public void search(String kw) {
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            onGridListener=(OnGridListener)context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString()+"必须实现onGridListener");
+        }
+
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        onGridListener=null;
+    }
+
+    public interface OnGridListener {
+        void returnPosition(int position);
     }
 }

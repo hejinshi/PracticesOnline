@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="10dp"
     android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/fragment_chart_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        <!--<net.lzzy.practicesonline.models.view.LineChartView-->
+            <!--android:layout_gravity="center|top"-->
+            <!--android:id="@+id/fragment_chart_line_ch"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_height="300dp" />-->
+        <!--<net.lzzy.practicesonline.models.view.BarChartView-->
+            <!--android:layout_gravity="center|bottom"-->
+            <!--android:id="@+id/fragment_chart_bar_chart"-->
+            <!--android:layout_height="300dp"-->
+            <!--android:layout_width="match_parent" />-->
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/fragment_chart_pie_chart"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+        </com.github.mikephil.charting.charts.PieChart>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/fragment_chart_line_ch_2"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_height="500dp">
+        </com.github.mikephil.charting.charts.LineChart>
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/fragment_chart_bar_chart2"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:visibility="gone"
+            android:layout_gravity="center">
+        </com.github.mikephil.charting.charts.BarChart>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/fragment_chart_dot_1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/dot_fill_style"/>
+        <TextView
+            android:id="@+id/fragment_chart_dot_2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/dot_style"/>
+        <TextView
+            android:id="@+id/fragment_chart_dot_3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/dot_style"/>
+    </LinearLayout>
+</FrameLayout>

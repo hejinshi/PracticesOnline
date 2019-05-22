@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.lzzy.practicesonline.R;
 import net.lzzy.practicesonline.fragment.QuestionFragment;
+import net.lzzy.practicesonline.models.FavoriteFactory;
 import net.lzzy.practicesonline.models.Question;
 import net.lzzy.practicesonline.models.QuestionFactory;
 import net.lzzy.practicesonline.models.UserCookies;
@@ -47,6 +48,7 @@ public class QuestionActivity extends AppCompatActivity {
     public static final String EXTRA_RESULT = "extraResult";
     public static final String EXTRA_PRACTICE_ID = "extraPracticeId";
     public static final int REQUEST_CODE_RESULT = 0;
+    public static final String EXTRA_QUESTION_POS = "extra_question_pos";
     private String practiceId;
     private int apiId;
     private List<Question> questions;
@@ -74,6 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
         pos = UserCookies.getInstance().getCurrentQuestion(practiceId);
         //setButton(practiceId,pos);
         pager.setCurrentItem(pos);
+
         refreshDots(pos);
         UserCookies.getInstance().updateReadCount(questions.get(pos).getId().toString());
 
@@ -109,6 +112,7 @@ public class QuestionActivity extends AppCompatActivity {
         List<QuestionResult> results=UserCookies.getInstance().getResultFromCookies(questions);
         Intent intent=new Intent(this,ResultActivity.class);
         intent.putExtra(EXTRA_PRACTICE_ID,practiceId);
+        intent.putExtra(EXTRA_QUESTION_POS,pos);
         intent.putParcelableArrayListExtra(EXTRA_RESULT,(ArrayList<? extends Parcelable>) results);
         startActivityForResult(intent, REQUEST_CODE_RESULT);
     }
@@ -116,6 +120,41 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data!=null){
+            if (data.getBooleanExtra(ResultActivity.EXTRA_FAVORITE_FLAG,false)){
+//                adapter=new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+//                    @Override
+//                    public Fragment getItem(int position) {
+//
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public int getCount() {
+//                        return 0;
+//                    }
+//                };
+
+                    FavoriteFactory factory=FavoriteFactory.getInstance();
+                    List<Question> r=new ArrayList<>();
+                    for (Question q:questions){
+                        if (factory.isQuestionStarred(q.getId().toString())){
+                            r.add(q);
+                        }
+                    }
+                    //放在此处避免ConcurrentModificationException(并发修改异常)
+                    questions.clear();
+                    questions.addAll(r);
+                    initDots();
+                    adapter.notifyDataSetChanged();
+
+
+//                adapter.destroyItem();
+            }else {
+                pager.setCurrentItem(data.getIntExtra(ResultActivity.EXTRA_QUESTION_POS,0));
+            }
+        }
+
     }
 
     private void initDots(){
@@ -297,6 +336,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
         };
         pager.setAdapter(adapter);
+        //pager.setCurrentItem();
     }
 
     private void retrieveData() {

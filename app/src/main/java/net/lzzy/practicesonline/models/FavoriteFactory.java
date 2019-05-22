@@ -72,7 +72,9 @@ public class FavoriteFactory {
     }
 
     public List<Question> getAllFavorites(List<Question> questions){
-
+        for (int i=0;i<questions.size();i++){
+            questions.get(i);
+        }
         return null;
     }
 
