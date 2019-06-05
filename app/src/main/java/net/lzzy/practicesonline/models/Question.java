@@ -24,6 +24,10 @@ public class Question extends BaseEntity implements Sqlitable, Jsonable {
     private String content;
     @Ignored
     private QuestionType type;
+
+
+
+    //private int order;
     private int dbType;
     private String analysis;
     private UUID practiceId;
@@ -34,7 +38,13 @@ public class Question extends BaseEntity implements Sqlitable, Jsonable {
         options=new ArrayList<>();
 
     }
-
+//    public int getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(int order) {
+//        this.order = order;
+//    }
     public String getContent() {
         return content;
     }
@@ -99,6 +109,7 @@ public class Question extends BaseEntity implements Sqlitable, Jsonable {
     public void fromJson(JSONObject jsonObject) throws JSONException {
         analysis=jsonObject.getString(ApiConstants.JSON_QUESTION_ANALYSIS);
         content=jsonObject.getString(ApiConstants.JSON_QUESTION_CONTENT);
+
         setDbType(jsonObject.getInt(ApiConstants.JSON_QUESTION_TYPE));
         String strOptions=jsonObject.getString(ApiConstants.JSON_QUESTION_OPTIONS);
         String strAnswers=jsonObject.getString(ApiConstants.JSON_QUESTION_ANSWER);
@@ -111,5 +122,6 @@ public class Question extends BaseEntity implements Sqlitable, Jsonable {
         } catch (IllegalAccessException|InstantiationException e) {
             e.printStackTrace();
         }
+        //order=jsonObject.getInt("Number");
     }
 }

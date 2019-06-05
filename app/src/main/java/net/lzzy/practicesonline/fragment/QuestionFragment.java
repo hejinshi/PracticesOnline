@@ -110,6 +110,7 @@ public class QuestionFragment extends BaseFragment {
     private void questionType() {
         isMulti = question.getType() == QuestionType.MULTI_CHOICE;
         int label = pos + 1;
+        //int label=question.getOrder();
         String qType = label + "." + question.getType().toString();
         textView.setText(qType);
         tvContent.setText(question.getContent());

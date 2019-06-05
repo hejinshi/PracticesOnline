@@ -186,8 +186,6 @@ public class PracticesFragment extends BaseFragment {
         tvTime.setVisibility(View.VISIBLE);
         tvHint.setVisibility(View.VISIBLE);
         executor.execute(()->{
-
-
                 try {
                    String json= PracticeService.getPracticesFromServer();
 
